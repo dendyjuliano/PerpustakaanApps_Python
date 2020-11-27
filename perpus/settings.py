@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'perpustakaan',
+    # untuk nama apps
+    'perpustakaan', 
+    # untuk rest api
     'rest_framework',
+    # untuk mengijinkan cors
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +53,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # atur untuk mengijinkan public middleware cors 
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'perpus.urls'
 
@@ -62,6 +70,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                # digunakan agar gambar langsung tersimpan di media
                 'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -124,16 +133,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# untuk mendapatkan file external seperti js dan css
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+# end
 
+# url default setelah login
 LOGIN_REDIRECT_URL = 'buku'
-
+# untuk url login
 LOGIN_URL = 'masuk'
 
+# tempat penyimpanan image url
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = BASE_DIR / "media"
